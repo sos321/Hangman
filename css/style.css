@@ -1,0 +1,158 @@
+/* ----------------------------- General resets -----------------------------*/
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: noContinue;
+    src: url(../fonts/gomarice_no_continue-webfont.woff);
+    font-weight: normal;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    overflow: hidden;
+    font-family: noContinue;
+    font-weight: bold;
+
+    font-size: 1.8rem;
+}
+
+/* ----------------------------- General styles -----------------------------*/
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -75%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heading-primary {
+    font-size: 8.2rem;
+    text-transform: uppercase;
+
+    text-align: center;
+}
+
+.description {
+    font-size: 1.882rem;
+    text-align: center;
+}
+
+/* ----------------------------- New game -----------------------------*/
+.btn-new {
+    font-size: 2.4rem;
+
+    margin-top: 2rem;
+}
+
+/* ----------------------------- Secret word -----------------------------*/
+.secret-word-holder {
+    margin-top: 3.2rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.secret-word-text {
+    font-size: 2.4rem;
+}
+
+span {
+    font-size: 3.2rem;
+}
+
+/* ----------------------------- Score -----------------------------*/
+.score-holder {
+    margin-top: 3.2rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.score-text {
+    font-size: 2.4rem;
+}
+
+.record-holder {
+    margin-top: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ----------------------------- Inputing a character -----------------------------*/
+
+.flex-container-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 2.4rem;
+}
+
+.input-holder {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+label {
+    font-size: 2.4rem;
+}
+
+.input-char {
+    border: 3px solid black;
+
+    width: 5rem;
+    height: 5rem;
+
+    font-size: 3rem;
+    font-family: inherit;
+
+    text-align: center;
+
+    transition: all 200ms;
+}
+
+.input-char:focus {
+    border: 5px solid black;
+    border-radius: 0px;
+    outline: none;
+}
+
+.btn {
+    background-color: black;
+    color: #fff;
+
+    border: none;
+    border-radius: 12px;
+
+    box-shadow: inset 0 0 0 0.4rem black;
+
+    padding: 1.2rem 1.6rem;
+
+    font-size: 1.8rem;
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition: all 300ms;
+}
+
+.btn:hover {
+    background-color: #fff;
+    color: black;
+}

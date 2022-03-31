@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/style.css" />
+
+        <title>Hangman</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="heading-primary">Hangman</h1>
+            <p class="description">Guess the word by guessing letters.</p>
+            <button class="btn btn-new">New word</button>
+            <div class="secret-word-holder">
+                <p class="secret-word-text">Secret word:</p>
+            </div>
+            <div class="score-holder">
+                <p class="score-text">Number of tries:</p>
+                <span class="score-value">0</span>
+            </div>
+            <div class="record-holder">
+                <p class="score-text">Record:</p>
+                <span class="score-value">0</span>
+            </div>
+            <div class="flex-container-column">
+                <div class="input-holder">
+                    <label for="char">Enter a character:</label>
+                    <input
+                        type="text"
+                        id="char"
+                        class="input-char"
+                        maxlength="1"
+                    />
+                </div>
+                <button class="btn">Guess</button>
+            </div>
+        </div>
+        <script src="js/script.js"></script>
+    </body>
+</html>
