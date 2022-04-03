@@ -67,7 +67,7 @@ let gameOver = false;
 
 printRandomWord();
 
-// Initialize theguessed letters with none
+// Initialize the guessed letters with none
 const noneTxt = document.createElement("span");
 noneTxt.textContent = "None";
 document.querySelector(".guessed-letters").appendChild(noneTxt);
