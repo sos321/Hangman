@@ -110,7 +110,7 @@ function printRandomWord() {
 
 function evalGuess() {
     // Get the guess value from the input field and clear it
-    const guess = document.querySelector(".input-char").value;
+    const guess = document.querySelector(".input-char").value.toLowerCase();
     document.querySelector(".input-char").value = "";
 
     // Check if the guess is a letter
@@ -120,8 +120,6 @@ function evalGuess() {
 
         return;
     }
-
-    guess = guess.toLowerCase();
 
     // Check if the letter was already guessed
     if (lettersGuessed.includes(guess)) {
