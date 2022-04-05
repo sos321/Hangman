@@ -121,6 +121,8 @@ function evalGuess() {
         return;
     }
 
+    guess = guess.toLowerCase();
+
     // Check if the letter was already guessed
     if (lettersGuessed.includes(guess)) {
         alert("You already guessed this letter");
