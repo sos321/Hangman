@@ -1,0 +1,20 @@
+/* 718px */
+@media (max-width: 44.875em) {
+    html {
+        font-size: 58%;
+    }
+}
+
+/* 390 px */
+@media (max-width: 24.375em) {
+    html {
+        font-size: 50%;
+    }
+}
+
+/* 750 px */
+@media (max-height: 46.875em) {
+    .container {
+        transform: translate(-50%, -50%);
+    }
+}
