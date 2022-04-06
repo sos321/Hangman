@@ -85,6 +85,14 @@ guessBtn.addEventListener("click", () => {
         evalGuess();
     }
 });
+document.querySelector(".input-char").addEventListener("keyup", event => {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        if (!gameOver) {
+            evalGuess();
+        }
+    }
+});
 
 function printRandomWord() {
     // Clear values
