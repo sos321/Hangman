@@ -1,0 +1,63 @@
+@import "_base.scss";
+
+// Header section
+.heading {
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-primary {
+        font-size: 8rem;
+        text-transform: uppercase;
+        font-weight: 400;
+    }
+
+    &-sub {
+        font-size: 2.5rem;
+        font-weight: 400;
+
+        width: 75%;
+    }
+}
+
+// Guess section
+.guess {
+    &-icon {
+        width: 2.4em;
+        height: 2.4em;
+    }
+
+    &-heading {
+        font-size: 4rem;
+        font-weight: 500;
+        margin-bottom: 1.8rem;
+    }
+
+    &-letters {
+        font-size: 3.6rem;
+        line-height: 178%;
+
+        margin-bottom: 1.8rem;
+
+        span {
+            cursor: pointer;
+        }
+    }
+}
+
+.used {
+    cursor: default !important;
+    color: $color-secondary;
+}
+
+// Hangman section
+.img {
+    height: 120%;
+}
+
+// Secret word section
+.secret-word {
+    font-size: 4rem;
+}

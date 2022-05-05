@@ -6,71 +6,76 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
             name="description"
-            content="This is a fun little game where you try to guess a secret word"
+            content="This is a fun little game where you try to guess a secret word before you get hanged"
         />
         <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="favicon/apple-touch-icon.png"
+            href="img/favicon/apple-touch-icon.png"
         />
         <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="favicon/favicon-32x32.png"
+            href="img/favicon/favicon-32x32.png"
         />
         <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="favicon/favicon-16x16.png"
+            href="img/favicon/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/queries.css" />
+        <link rel="stylesheet" href="css/main.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap"
             rel="stylesheet"
         />
 
         <title>Hangman</title>
     </head>
     <body>
-        <div class="container">
-            <h1 class="heading-primary">Hangman</h1>
-            <p class="description">Guess the word by guessing letters.</p>
-            <button class="btn btn-new">New word</button>
-            <div class="secret-word-holder">
-                <p class="secret-word-text">Secret word:</p>
-                <div class="secret-word"></div>
+        <main>
+            <div class="heading">
+                <h1 class="heading-primary">Hangman</h1>
+                <p class="heading-sub">Guess the word before you get hanged!</p>
             </div>
-            <div class="score-holder">
-                <p class="score-text">Number of tries:</p>
-                <span class="score-value">0</span>
-            </div>
-            <div class="record-holder">
-                <p class="record-text">Record:</p>
-                <span class="record-value">0</span>
-            </div>
-            <div class="flex-container-column">
-                <div class="input-holder">
-                    <label for="char">Enter a character:</label>
-                    <input
-                        type="text"
-                        id="char"
-                        class="input-char"
-                        maxlength="1"
-                    />
+            <div class="content">
+                <div class="guess">
+                    <h2 class="guess-heading">Letters:</h2>
+                    <div class="guess-letters">
+                        <span>A</span><span>B</span><span>C</span><span>D</span
+                        ><span>E</span><span>F</span><span>G</span><span>H</span
+                        ><span>I</span><span>J</span><span>K</span><span>L</span
+                        ><span>M</span><span>N</span><span>O</span><span>P</span
+                        ><span>Q</span><span>R</span><span>S</span><span>T</span
+                        ><span>U</span><span>V</span><span>W</span><span>X</span
+                        ><span>Y</span><span>Z</span>
+                    </div>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="guess-icon"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="1"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
+                        />
+                    </svg>
                 </div>
-                <button class="btn btn-guess">Guess</button>
+                <img src="img/hangman.png" alt="Hangman" class="img" />
             </div>
-            <div class="guessed-letters-holder">
-                <p class="guessed-letters-text">Guessed letters:</p>
-                <div class="guessed-letters"></div>
-            </div>
-        </div>
+            <p class="secret-word">
+                <span>_</span><span>_</span><span>_</span><span>_</span
+                ><span>_</span><span>_</span>
+            </p>
+        </main>
         <script src="js/script.js"></script>
     </body>
 </html>

@@ -51,54 +51,27 @@ const words = [
     "self",
 ];
 
-const newWordBtn = document.querySelector(".btn-new");
-const guessBtn = document.querySelector(".btn-guess");
-const numOfTriesEl = document.querySelector(".score-value");
-const recordEl = document.querySelector(".record-value");
+let lettersEl = document.querySelectorAll(".guess-letters span");
 
-let score = 0;
-let record = 0;
+// Give the letters Event listeners
+lettersEl.forEach((letter, i) => {
+    letter.addEventListener("click", function () {
+        // TODO Evaluate guess
+        // evalGuess(i);
 
-let secretWord;
+        this.classList.add("used");
+    });
+});
+
+let secretWord = "";
+let state = 0;
 let correctGuesses = 0;
-let lettersGuessed = [];
-
-let gameOver = false;
 
 printRandomWord();
 
-// Initialize the guessed letters with none
-const noneTxt = document.createElement("span");
-noneTxt.textContent = "None";
-document.querySelector(".guessed-letters").appendChild(noneTxt);
-
-newWordBtn.addEventListener("click", () => {
-    document.querySelector(".guessed-letters").innerHTML = "";
-    const noneTxt = document.createElement("span");
-    noneTxt.textContent = "None";
-    document.querySelector(".guessed-letters").appendChild(noneTxt);
-
-    printRandomWord();
-});
-guessBtn.addEventListener("click", () => {
-    if (!gameOver) {
-        evalGuess();
-    }
-});
-document.querySelector(".input-char").addEventListener("keyup", event => {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        if (!gameOver) {
-            evalGuess();
-        }
-    }
-});
-
+// Print the secret word
 function printRandomWord() {
-    // Clear values
-    endGame();
-
-    // Get a random word
+    // Get the random word
     secretWord = words[Math.trunc(Math.random() * words.length)];
 
     // Clean the DOM node
@@ -111,32 +84,9 @@ function printRandomWord() {
 
         document.querySelector(".secret-word").appendChild(SpanEl);
     }
-
-    // Enable the game
-    gameOver = false;
 }
 
-function evalGuess() {
-    // Get the guess value from the input field and clear it
-    const guess = document.querySelector(".input-char").value.toLowerCase();
-    document.querySelector(".input-char").value = "";
-
-    // Check if the guess is a letter
-    if (!isLetter(guess)) {
-        alert("Please enter a letter");
-        document.querySelector(".input-char").value = "";
-
-        return;
-    }
-
-    // Check if the letter was already guessed
-    if (lettersGuessed.includes(guess)) {
-        alert("You already guessed this letter");
-        document.querySelector(".input-char").value = "";
-
-        return;
-    }
-
+function evalGuess(letter) {
     for (letter in secretWord) {
         // Check if the guess is the letter
         if (guess === secretWord[letter]) {
@@ -148,58 +98,11 @@ function evalGuess() {
             correctGuesses++;
             // Add the letter to the list of guessed letters
             lettersGuessed.push(guess);
-        } else {
-            if (!secretWord.includes(guess)) {
-                if (!lettersGuessed.includes(guess)) {
-                    // Clear the 'None' text if it's the first letter
-                    if (lettersGuessed.length - correctGuesses === 0) {
-                        document.querySelector(".guessed-letters").innerHTML =
-                            "";
-                    }
-                    // Add the letter to the already guessed letters
-                    const triesEl = document.createElement("span");
-                    triesEl.textContent = guess;
-                    document
-                        .querySelector(".guessed-letters")
-                        .appendChild(triesEl);
-
-                    lettersGuessed.push(guess);
-
-                    // Update the score
-                    score++;
-                    numOfTriesEl.textContent = score;
-                }
-            }
         }
     }
 
-    // Check if the word is guessed
-    if (correctGuesses === secretWord.length) {
-        // Disable the score
-        gameOver = true;
-        // Update the record
-        record = record > score || record === 0 ? score : record;
-        recordEl.textContent = record;
-
-        // Clear the values
-        endGame();
-    }
+    // TODO Add a check for the word guessed
 }
 
-// Checks if the input is a letter
-function isLetter(char) {
-    // Is it a string
-    if (typeof char !== "string") return false;
-
-    // Can it be converted to lowercase and uppercase
-    return char.toLowerCase() !== char.toUpperCase();
-}
-
-// Ends the game and clears all values
-function endGame() {
-    numOfTriesEl.textContent = "0";
-    document.querySelector(".input-char").value = "";
-    score = 0;
-    correctGuesses = 0;
-    lettersGuessed = [];
-}
+// TODO Mask the hangman image
+// TODO Udpate the mask whenever state changes
