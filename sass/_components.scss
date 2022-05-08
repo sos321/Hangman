@@ -1,6 +1,6 @@
 @import "_base.scss";
 
-// Header section
+// * Header section
 .heading {
     text-align: center;
 
@@ -18,7 +18,7 @@
     }
 }
 
-// Guess section
+// * Guess section
 .guess {
     &-icon {
         width: 2.4em;
@@ -69,7 +69,7 @@
     }
 }
 
-// Secret word section
+// * Secret word section
 .secret-word {
     font-size: 5rem;
 
@@ -95,6 +95,8 @@
         transform: translateX(0%);
     }
 }
+
+// * Restart and ending screen
 
 .restart-icon {
     position: absolute;

@@ -53,35 +53,6 @@ const words = [
     "self",
 ];
 
-const letters = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-];
-
 const colors = new Map();
 colors
     .set("win", "#B5CCA7")
@@ -99,11 +70,11 @@ let gameEnded = false;
 
 const tries = 11;
 
-document.querySelectorAll;
-
+// Make restart text rounded
 const roundedText = new CircleType(document.querySelector(".ending-bg-text"));
 roundedText.radius(150).dir(-1);
 
+// Initialize game
 startLetters();
 printRandomWord();
 
@@ -111,13 +82,12 @@ document.querySelector(".restart-icon").addEventListener("click", restart);
 
 function startLetters() {
     // Give the letters Event listeners
-    document
-        .querySelectorAll(".guess-letters span")
-        .forEach(function (letter, i) {
-            letter.addEventListener("click", createClickEvent, { once: true });
-        });
+    lettersEl.forEach(function (letter) {
+        letter.addEventListener("click", createClickEvent, { once: true });
+    });
 }
 
+// Click events
 function createClickEvent() {
     evalGuess(this.textContent.toLowerCase());
     this.classList.add("used");
@@ -129,12 +99,13 @@ function restart() {
     correctGuesses = 0;
 
     animateBackground();
+    document.querySelector(".restart-icon").style.color = "#bababa";
     gameEnded = false;
 
     startLetters();
     printRandomWord();
 
-    document.querySelectorAll(".guess-letters span").forEach(letter => {
+    lettersEl.forEach(letter => {
         letter.style.color = "black";
         letter.classList.remove("used");
     });
@@ -171,9 +142,8 @@ function evalGuess(guess) {
             document.querySelectorAll(".secret-word span")[letter].textContent =
                 guess.toUpperCase();
 
-            document.querySelectorAll(".guess-letters span")[
-                guess.charCodeAt(0) - 97
-            ].style.color = colors.get("correct");
+            lettersEl[guess.charCodeAt(0) - 97].style.color =
+                colors.get("correct");
 
             // Increment the correct guesses
             correctGuesses++;
@@ -184,9 +154,8 @@ function evalGuess(guess) {
     if (tempCorrectGuesss === correctGuesses) {
         updateState();
 
-        document.querySelectorAll(".guess-letters span")[
-            guess.charCodeAt(0) - 97
-        ].style.color = colors.get("incorrect");
+        lettersEl[guess.charCodeAt(0) - 97].style.color =
+            colors.get("incorrect");
 
         document
             .querySelector(".secret-word")
@@ -205,17 +174,15 @@ function evalGuess(guess) {
 function evalGameState() {
     // Win condition
     if (correctGuesses === secretWord.length) {
-        document.body.style.backgroundColor = colors.get("win");
         endGame("win");
     }
 
     // Lose condition
     if (state === tries) {
-        document.body.style.backgroundColor = colors.get("lose");
+        endGame("lose");
 
         // Print the secret word
         printEntireWord();
-        endGame("lose");
     }
 }
 
@@ -240,12 +207,11 @@ function updateState() {
 
 function endGame(result) {
     gameEnded = true;
+
     // Play ending animation
     document.querySelector(".restart-icon").style.color = "black";
     endingEL.style.backgroundColor = `${colors.get(result)}`;
     animateBackground();
-
-    removeEventListeners();
 }
 
 function animateBackground() {
@@ -258,12 +224,4 @@ function animateBackground() {
             endingEL.classList.add("animate-from");
         } else endingEL.classList.add("animate-to");
     }
-}
-
-function removeEventListeners() {
-    document.querySelectorAll(".guess-letters span").forEach(letter =>
-        letter.removeEventListener("click", createClickEvent, {
-            once: true,
-        })
-    );
 }
