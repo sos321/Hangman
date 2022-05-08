@@ -44,6 +44,8 @@ body {
     font-size: 1.8rem;
     overflow-x: hidden;
     font-family: "Orbitron", sans-serif;
+
+    background-color: white !important;
 }
 
 a:not([class]) {
@@ -57,4 +59,18 @@ img {
 
 button {
     font: inherit;
+}
+
+svg {
+    transition: opacity 400ms;
+}
+
+// * Mixins
+
+@mixin flex-container($gap: 0, $direction: column) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: $direction;
+    gap: $gap;
 }

@@ -4,10 +4,6 @@
 .heading {
     text-align: center;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
     &-primary {
         font-size: 8rem;
         text-transform: uppercase;
@@ -30,8 +26,9 @@
     }
 
     &-heading {
-        font-size: 4rem;
-        font-weight: 500;
+        font-size: 2.4rem;
+        font-weight: 600;
+
         margin-bottom: 1.8rem;
     }
 
@@ -43,6 +40,12 @@
 
         span {
             cursor: pointer;
+
+            transition: all 300ms;
+
+            &:hover {
+                transform: rotateZ(20deg);
+            }
         }
     }
 }
@@ -50,14 +53,118 @@
 .used {
     cursor: default !important;
     color: $color-secondary;
+
+    &:hover {
+        transform: none !important;
+    }
 }
 
 // Hangman section
-.img {
-    height: 120%;
+.hangman {
+    position: relative;
+
+    &-img {
+        height: 100%;
+        width: 40rem;
+    }
 }
 
 // Secret word section
 .secret-word {
-    font-size: 4rem;
+    font-size: 5rem;
+
+    span {
+        text-transform: uppercase;
+    }
+}
+
+.animation-trigger {
+    animation: wiggle 200ms;
+}
+
+@keyframes wiggle {
+    33% {
+        transform: translateX(3%);
+    }
+
+    66% {
+        transform: translateX(-3%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.restart-icon {
+    position: absolute;
+    top: 9%;
+    right: 7%;
+
+    width: 8rem;
+    height: 8rem;
+
+    color: $color-secondary;
+
+    cursor: pointer;
+
+    transition: all 300ms;
+}
+
+.ending-bg {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    clip-path: circle(0% at 91% 13%);
+
+    z-index: -1;
+
+    &-text {
+        position: absolute;
+
+        top: 16%;
+        left: 88%;
+
+        font-size: 3.2rem;
+        letter-spacing: -15px;
+        font-weight: 500;
+
+        transform: rotate(40deg);
+    }
+}
+
+.animate-to {
+    animation: 800ms linear 0s forwards endingto;
+}
+
+.animate-from {
+    animation: 400ms linear 0s forwards endingfrom;
+}
+
+@keyframes endingto {
+    to {
+        clip-path: circle(200% at 91% 13%);
+    }
+}
+
+@keyframes endingfrom {
+    from {
+        clip-path: circle(200% at 91% 13%);
+    }
+    to {
+        clip-path: circle(0% at 91% 13%);
+    }
+}
+
+// * Strokes
+
+@keyframes fill {
+    from {
+        stroke-dashoffset: 300;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
 }

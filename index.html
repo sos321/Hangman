@@ -37,14 +37,33 @@
         <title>Hangman</title>
     </head>
     <body>
+        <svg
+            class="restart-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1"
+        >
+            <path
+                id="curve"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+            />
+        </svg>
+        <div class="ending-bg">
+            <p class="ending-bg-text">restart</p>
+        </div>
         <main>
             <div class="heading">
                 <h1 class="heading-primary">Hangman</h1>
                 <p class="heading-sub">Guess the word before you get hanged!</p>
             </div>
+            <p class="secret-word"></p>
             <div class="content">
                 <div class="guess">
-                    <h2 class="guess-heading">Letters:</h2>
+                    <h2 class="guess-heading">Choose wisely:</h2>
                     <div class="guess-letters">
                         <span>A</span><span>B</span><span>C</span><span>D</span
                         ><span>E</span><span>F</span><span>G</span><span>H</span
@@ -69,13 +88,180 @@
                         />
                     </svg>
                 </div>
-                <img src="img/hangman.png" alt="Hangman" class="img" />
+                <div class="hangman">
+                    <svg
+                        width="357"
+                        height="275"
+                        viewBox="0 0 357 275"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="hangman-img"
+                    >
+                        <path
+                            d="M0.5 273H288"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-dasharray="14 16"
+                        />
+                        <path
+                            d="M0.5 273H288"
+                            stroke="black"
+                            stroke-width="3"
+                            opacity="0"
+                            class="stroke-1 stroke-edit"
+                            stroke-dasharray="300"
+                        />
+                        <path
+                            d="M144 274V1"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-dasharray="16 16"
+                        />
+                        <path
+                            d="M144 274V1"
+                            stroke="black"
+                            stroke-width="3"
+                            opacity="0"
+                            class="stroke-2 stroke-edit"
+                            stroke-dasharray="300"
+                        />
+                        <path
+                            d="M322.499 2.5L143 2"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-dasharray="15 16"
+                        />
+                        <path
+                            d="M143 2L322.499 2.5"
+                            stroke="black"
+                            stroke-width="3"
+                            opacity="0"
+                            class="stroke-3 stroke-edit"
+                            stroke-dasharray="300"
+                        />
+                        <path
+                            d="M144 45L196 2"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-dasharray="12 15"
+                        />
+                        <path
+                            d="M144 45L196 2"
+                            stroke="black"
+                            stroke-width="3"
+                            opacity="0"
+                            class="stroke-4 stroke-edit"
+                            stroke-dasharray="300"
+                        />
+                        <path
+                            d="M322 1L321.5 49"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-dasharray="14 14"
+                        />
+                        <path
+                            d="M322 1L321.5 49"
+                            stroke="black"
+                            stroke-width="3"
+                            opacity="0"
+                            class="stroke-5 stroke-edit"
+                            stroke-dasharray="300"
+                        />
+                        <circle
+                            cx="321.5"
+                            cy="74.5"
+                            r="24"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-dasharray="12 14"
+                        />
+                        <circle
+                            cx="321.5"
+                            cy="74.5"
+                            r="24"
+                            stroke="black"
+                            stroke-width="3"
+                            opacity="0"
+                            class="stroke-6 stroke-edit"
+                            stroke-dasharray="300"
+                        />
+                        <path
+                            d="M322 98.5V185"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-dasharray="12 14"
+                        />
+                        <path
+                            d="M322 98.5V185"
+                            stroke="black"
+                            stroke-width="3"
+                            opacity="0"
+                            class="stroke-7 stroke-edit"
+                            stroke-dasharray="300"
+                        />
+                        <path
+                            d="M322 133L356 114"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-dasharray="12 14"
+                        />
+                        <path
+                            d="M322 133L356 114"
+                            stroke="black"
+                            stroke-width="3"
+                            opacity="0"
+                            class="stroke-8 stroke-edit"
+                            stroke-dasharray="300"
+                        />
+                        <path
+                            d="M281 114L321.5 133"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-dasharray="12 14"
+                        />
+                        <path
+                            d="M321.5 133L281 114"
+                            stroke="black"
+                            stroke-width="3"
+                            opacity="0"
+                            class="stroke-9 stroke-edit"
+                            stroke-dasharray="300"
+                        />
+                        <path
+                            d="M322 184.5L352 229.5"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-dasharray="12 14"
+                        />
+                        <path
+                            d="M322 184.5L352 229.5"
+                            stroke="black"
+                            stroke-width="3"
+                            opacity="0"
+                            class="stroke-10 stroke-edit"
+                            stroke-dasharray="300"
+                        />
+                        <path
+                            d="M322 184.5L288.5 229.5"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-dasharray="12 14"
+                        />
+                        <path
+                            d="M322 184.5L288.5 229.5"
+                            stroke="black"
+                            stroke-width="3"
+                            opacity="0"
+                            class="stroke-11 stroke-edit"
+                            stroke-dasharray="300"
+                        />
+                    </svg>
+                </div>
             </div>
-            <p class="secret-word">
-                <span>_</span><span>_</span><span>_</span><span>_</span
-                ><span>_</span><span>_</span>
-            </p>
         </main>
-        <script src="js/script.js"></script>
+        <script type="module" src="js/script.js"></script>
+        <script src="./node_modules/circletype/dist/circletype.min.js"></script>
+        <noscript>Please enable JavaScript to use this website</noscript>
     </body>
 </html>
