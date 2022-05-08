@@ -28,4 +28,5 @@ The biggest obstacle was to resolve an issue with the installed dependency and t
 ## Possible extensions
 
 -   [ ] Animating the hangman on restart
+-   [ ] Animating the hangman on hover
 -   [ ] Adding you lost / won text
