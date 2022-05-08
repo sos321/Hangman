@@ -111,6 +111,10 @@
     cursor: pointer;
 
     transition: all 300ms;
+
+    &:hover {
+        transform: rotate(-45deg);
+    }
 }
 
 .ending-bg {
