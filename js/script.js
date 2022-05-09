@@ -1,5 +1,3 @@
-"use strict";
-
 const words = [
     "mine",
     "raw",
@@ -53,175 +51,155 @@ const words = [
     "self",
 ];
 
-const colors = new Map();
-colors
-    .set("win", "#B5CCA7")
-    .set("lose", "#EDA8A5")
-    .set("correct", "#405C2F")
-    .set("incorrect", "#83302C");
+const newWordBtn = document.querySelector(".btn-new");
+const guessBtn = document.querySelector(".btn-guess");
+const numOfTriesEl = document.querySelector(".score-value");
+const recordEl = document.querySelector(".record-value");
 
-const lettersEl = document.querySelectorAll(".guess-letters span");
-const endingEL = document.querySelector(".ending-bg");
+let score = 0;
+let record = 0;
 
-let secretWord = "";
-let state = 0;
+let secretWord;
 let correctGuesses = 0;
-let gameEnded = false;
+let lettersGuessed = [];
 
-const tries = 11;
+let gameOver = false;
 
-// Make restart text rounded
-const roundedText = new CircleType(document.querySelector(".ending-bg-text"));
-roundedText.radius(150).dir(-1);
-
-// Initialize game
-startLetters();
 printRandomWord();
 
-document.querySelector(".restart-icon").addEventListener("click", restart);
+// Initialize the guessed letters with none
+const noneTxt = document.createElement("span");
+noneTxt.textContent = "None";
+document.querySelector(".guessed-letters").appendChild(noneTxt);
 
-function startLetters() {
-    // Give the letters Event listeners
-    lettersEl.forEach(function (letter) {
-        letter.addEventListener("click", createClickEvent, { once: true });
-    });
-}
+newWordBtn.addEventListener("click", () => {
+    document.querySelector(".guessed-letters").innerHTML = "";
+    const noneTxt = document.createElement("span");
+    noneTxt.textContent = "None";
+    document.querySelector(".guessed-letters").appendChild(noneTxt);
 
-// Click events
-function createClickEvent() {
-    evalGuess(this.textContent.toLowerCase());
-    this.classList.add("used");
-}
-
-function restart() {
-    // Reset the game
-    state = 0;
-    correctGuesses = 0;
-
-    animateBackground();
-    document.querySelector(".restart-icon").style.color = "#bababa";
-    gameEnded = false;
-
-    startLetters();
     printRandomWord();
-
-    lettersEl.forEach(letter => {
-        letter.style.color = "black";
-        letter.classList.remove("used");
-    });
-
-    document.querySelectorAll(".stroke-edit").forEach(path => {
-        path.style.opacity = "0";
-        path.style.strokeDashOffset = "300";
-        path.style.animation = "none";
-    });
-}
+});
+guessBtn.addEventListener("click", () => {
+    if (!gameOver) {
+        evalGuess();
+    }
+});
+document.querySelector(".input-char").addEventListener("keyup", event => {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        if (!gameOver) {
+            evalGuess();
+        }
+    }
+});
 
 function printRandomWord() {
-    // Get the random word
+    // Clear values
+    endGame();
+
+    // Get a random word
     secretWord = words[Math.trunc(Math.random() * words.length)];
 
     // Clean the DOM node
     document.querySelector(".secret-word").innerHTML = "";
 
     // Print the word
-    for (let letter in secretWord) {
+    for (letter in secretWord) {
         const SpanEl = document.createElement("span");
         SpanEl.textContent = "_";
 
         document.querySelector(".secret-word").appendChild(SpanEl);
     }
+
+    // Enable the game
+    gameOver = false;
 }
 
-function evalGuess(guess) {
-    const tempCorrectGuesss = correctGuesses;
+function evalGuess() {
+    // Get the guess value from the input field and clear it
+    const guess = document.querySelector(".input-char").value.toLowerCase();
+    document.querySelector(".input-char").value = "";
 
-    for (let letter in secretWord) {
+    // Check if the guess is a letter
+    if (!isLetter(guess)) {
+        alert("Please enter a letter");
+        document.querySelector(".input-char").value = "";
+
+        return;
+    }
+
+    // Check if the letter was already guessed
+    if (lettersGuessed.includes(guess)) {
+        alert("You already guessed this letter");
+        document.querySelector(".input-char").value = "";
+
+        return;
+    }
+
+    for (letter in secretWord) {
+        // Check if the guess is the letter
         if (guess === secretWord[letter]) {
             // Reveal the letter
             document.querySelectorAll(".secret-word span")[letter].textContent =
-                guess.toUpperCase();
+                guess;
 
-            lettersEl[guess.charCodeAt(0) - 97].style.color =
-                colors.get("correct");
-
-            // Increment the correct guesses
+            // Increase the number of correct guesses
             correctGuesses++;
+            // Add the letter to the list of guessed letters
+            lettersGuessed.push(guess);
+        } else {
+            if (!secretWord.includes(guess)) {
+                if (!lettersGuessed.includes(guess)) {
+                    // Clear the 'None' text if it's the first letter
+                    if (lettersGuessed.length - correctGuesses === 0) {
+                        document.querySelector(".guessed-letters").innerHTML =
+                            "";
+                    }
+                    // Add the letter to the already guessed letters
+                    const triesEl = document.createElement("span");
+                    triesEl.textContent = guess;
+                    document
+                        .querySelector(".guessed-letters")
+                        .appendChild(triesEl);
+
+                    lettersGuessed.push(guess);
+
+                    // Update the score
+                    score++;
+                    numOfTriesEl.textContent = score;
+                }
+            }
         }
     }
 
-    // If the correct guesses have not changed, then the guess was incorrect
-    if (tempCorrectGuesss === correctGuesses) {
-        updateState();
-
-        lettersEl[guess.charCodeAt(0) - 97].style.color =
-            colors.get("incorrect");
-
-        document
-            .querySelector(".secret-word")
-            .classList.add("animation-trigger");
-
-        setTimeout(() => {
-            document
-                .querySelector(".secret-word")
-                .classList.remove("animation-trigger");
-        }, 300);
-    }
-
-    evalGameState();
-}
-
-function evalGameState() {
-    // Win condition
+    // Check if the word is guessed
     if (correctGuesses === secretWord.length) {
-        endGame("win");
-    }
+        // Disable the score
+        gameOver = true;
+        // Update the record
+        record = record > score || record === 0 ? score : record;
+        recordEl.textContent = record;
 
-    // Lose condition
-    if (state === tries) {
-        endGame("lose");
-
-        // Print the secret word
-        printEntireWord();
-    }
-}
-
-function printEntireWord() {
-    const secretWordEls = document.querySelectorAll(".secret-word span");
-
-    for (let letter in secretWord) {
-        if (secretWordEls[letter].textContent === "_") {
-            secretWordEls[letter].textContent = secretWord[letter];
-            secretWordEls[letter].style.color = colors.get("correct");
-        }
+        // Clear the values
+        endGame();
     }
 }
 
-function updateState() {
-    state++;
+// Checks if the input is a letter
+function isLetter(char) {
+    // Is it a string
+    if (typeof char !== "string") return false;
 
-    document.querySelector(`.stroke-${state}`).style.opacity = "100";
-    document.querySelector(`.stroke-${state}`).style.animation =
-        "fill 600ms forwards";
+    // Can it be converted to lowercase and uppercase
+    return char.toLowerCase() !== char.toUpperCase();
 }
 
-function endGame(result) {
-    gameEnded = true;
-
-    // Play ending animation
-    document.querySelector(".restart-icon").style.color = "black";
-    endingEL.style.backgroundColor = `${colors.get(result)}`;
-    animateBackground();
-}
-
-function animateBackground() {
-    if (gameEnded) {
-        if (endingEL.classList.contains("animate-from")) {
-            endingEL.classList.remove("animate-from");
-            endingEL.classList.add("animate-to");
-        } else if (endingEL.classList.contains("animate-to")) {
-            endingEL.classList.remove("animate-to");
-            endingEL.classList.add("animate-from");
-        } else endingEL.classList.add("animate-to");
-    }
+// Ends the game and clears all values
+function endGame() {
+    numOfTriesEl.textContent = "0";
+    document.querySelector(".input-char").value = "";
+    score = 0;
+    correctGuesses = 0;
+    lettersGuessed = [];
 }
