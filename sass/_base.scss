@@ -25,7 +25,9 @@ dd {
 }
 
 html {
-    font-size: 62.5%;
+    font-size: 10px;
+
+    height: 100%;
 
     &:focus-within {
         scroll-behavior: smooth;
@@ -33,7 +35,7 @@ html {
 }
 
 body {
-    min-height: 100vh;
+    height: 100%;
     overflow-x: hidden;
 
     text-rendering: optimizeSpeed;
