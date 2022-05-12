@@ -99,7 +99,7 @@
 // * Restart and ending screen
 
 .restart-icon {
-    position: absolute;
+    position: fixed;
     top: 9%;
     right: 7%;
 
@@ -132,7 +132,7 @@
     z-index: -1;
 
     &-text {
-        position: absolute;
+        position: fixed;
 
         top: 16%;
         left: 88%;

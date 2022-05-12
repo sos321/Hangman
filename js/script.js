@@ -80,6 +80,9 @@ printRandomWord();
 
 document.querySelector(".restart-icon").addEventListener("click", restart);
 
+// Set a correct background size
+endingEL.style.height = `${document.documentElement.scrollHeight}px`;
+
 function startLetters() {
     // Give the letters Event listeners
     lettersEl.forEach(function (letter) {
