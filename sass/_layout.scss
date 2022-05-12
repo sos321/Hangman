@@ -1,11 +1,13 @@
 @import "_base.scss";
 
-main {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+// * Body
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+main {
     @include flex-container(8rem);
 
     margin-bottom: 2rem;
