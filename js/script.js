@@ -80,8 +80,10 @@ printRandomWord();
 
 document.querySelector(".restart-icon").addEventListener("click", restart);
 
-// Set a correct background size
-endingEL.style.height = `${document.documentElement.scrollHeight}px`;
+function resizeBG() {
+    // Set a correct background size
+    endingEL.style.height = `${document.documentElement.scrollHeight}px`;
+}
 
 function startLetters() {
     // Give the letters Event listeners
@@ -209,6 +211,8 @@ function updateState() {
 }
 
 function endGame(result) {
+    resizeBG();
+
     gameEnded = true;
 
     // Play ending animation
