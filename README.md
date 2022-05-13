@@ -11,7 +11,7 @@ This is my very first own project designed and programmed by myself.
 -   Modules:
     -   circletype
     -   gh-pages
-    -   minify
+    -   uglify
 
 ## What I learned
 
