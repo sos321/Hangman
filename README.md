@@ -15,7 +15,7 @@ This is my very first own project designed and programmed by myself.
 
 ## What I learned
 
-Hangman took me about 3 days of hard work to complete and gave me a lot of new informations about web design:
+Hangman took me about 3 days of hard work to complete and gave me plenty of new expierence with basic web design:
 
 -   How to use NPM and install dependencies
 -   NPM scripts and deployment automatization
