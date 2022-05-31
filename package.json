@@ -13,7 +13,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/sos321/Hangman.git"
+        "url": "git+https://github.com/sos321/hangman.git"
     },
     "keywords": [
         "game",
@@ -22,7 +22,7 @@
     "author": "Filip Kocian",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/sos321/Hangman/issues"
+        "url": "https://github.com/sos321/hangman/issues"
     },
-    "homepage": "https://github.com/sos321/Hangman"
+    "homepage": "https://github.com/sos321/hangman"
 }
