@@ -232,3 +232,10 @@ function animateBackground() {
         } else endingEL.classList.add("animate-to");
     }
 }
+
+// Handling key presses
+document.addEventListener("keydown", function (e) {
+    if (e.key.charCodeAt(0) >= 97 && e.key.charCodeAt(0) <= 122) {
+        evalGuess(e.key.toLowerCase());
+    }
+});
